@@ -69,33 +69,43 @@ section.block{padding:90px 0}
 .head h2{font-size:clamp(32px,5vw,52px);margin-top:10px}
 .head p{color:var(--muted);max-width:600px;margin:6px auto 0}
 
-/* product */
-.product{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-bottom:110px}
-.product:last-child{margin-bottom:0}
-.product.rev .gallery{order:2}
-.gallery{position:relative;height:560px}
-.gallery img{position:absolute;width:62%;border-radius:22px;box-shadow:0 25px 50px rgba(120,40,0,.25);transition:transform .35s}
-.gallery img:nth-child(1){top:0;right:0;transform:rotate(4deg);z-index:1}
-.gallery img:nth-child(2){bottom:0;left:0;transform:rotate(-4deg);z-index:2}
-.gallery:hover img:nth-child(1){transform:rotate(6deg) translate(10px,-6px)}
-.gallery:hover img:nth-child(2){transform:rotate(-6deg) translate(-10px,6px)}
-.info .kicker{color:var(--o2);font-weight:800}
-.info h3{font-size:clamp(32px,4.5vw,48px)}
-.info .lead{font-size:19px;color:var(--muted);margin:6px 0 20px}
-.info ul{list-style:none;display:grid;gap:12px;margin-bottom:28px}
-.info li{display:flex;gap:12px;align-items:flex-start}
-.info li::before{content:"";flex:none;width:24px;height:24px;margin-top:3px;border-radius:50%;
-  background:var(--o2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/14px no-repeat}
-.price-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:18px 22px;background:var(--card);border:1px solid var(--line);border-radius:18px}
-.price{font-family:Lalezar,sans-serif;font-size:44px;color:var(--o2);line-height:1}
-.price small{font-family:Tajawal;font-size:15px;color:var(--muted);font-weight:500;display:block;margin-bottom:4px}
-.price-row .btn{margin-inline-start:auto}
+/* product — كل مشروع شريط كامل بلون مميز */
+.product{--ac:var(--o2);--tint:#fff3e6;--deep:#7c2d12;padding:80px 0;
+  background:linear-gradient(180deg,var(--tint) 0%,#fff 100%);border-top:1px solid var(--line)}
+.product.p-lectures{--ac:#ea580c;--tint:#ffedd5;--deep:#7c2d12}
+.product.p-attend{--ac:#be123c;--tint:#ffe4e6;--deep:#881337}
+.product.p-pager{--ac:#d97706;--tint:#fef3c7;--deep:#78350f}
+.p-top{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:40px}
+.info .kicker{display:inline-block;background:var(--ac);color:#fff;font-weight:700;padding:4px 14px;border-radius:999px;font-size:14px}
+.info h3{font-size:clamp(36px,5vw,58px);color:var(--deep);margin-top:8px}
+.info .lead{font-size:19px;color:var(--muted);margin-top:4px}
+.feat{list-style:none;display:grid;gap:10px}
+.feat li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.feat li::before{content:"";flex:none;width:24px;height:24px;margin-top:3px;border-radius:50%;
+  background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/14px no-repeat}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.gallery button{all:unset;cursor:zoom-in;border-radius:22px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;aspect-ratio:4/5;background:#eee}
+.gallery button:hover{transform:translateY(-6px);box-shadow:0 26px 50px rgba(0,0,0,.2)}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.price-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:36px;padding:20px 26px;background:var(--deep);color:#fff;border-radius:20px}
+.price{font-family:Lalezar,sans-serif;font-size:48px;line-height:1}
+.price small{font-family:Tajawal;font-size:15px;opacity:.8;font-weight:500;display:block;margin-bottom:4px}
+.price-row .note{opacity:.85}
+.price-row .btn{margin-inline-start:auto;background:#fff;color:var(--deep)}
 @media(max-width:860px){
-  .product,.product.rev{grid-template-columns:1fr;gap:30px}
-  .product.rev .gallery{order:0}
-  .gallery{height:auto;aspect-ratio:1/1.05}
+  .product{padding:60px 0}
+  .p-top{grid-template-columns:1fr;gap:20px}
+  .gallery{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin:0 -20px;padding-inline:20px}
+  .gallery button{scroll-snap-align:center}
   .price-row .btn{margin-inline-start:0;width:100%;justify-content:center}
 }
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,6,4,.92);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.open{display:flex}
+.lb img{max-height:92vh;max-width:92vw;border-radius:16px}
+.lb .x{position:absolute;top:16px;left:16px;width:44px;height:44px;border-radius:50%;background:#fff;border:0;font-size:24px;cursor:pointer}
+.lb .nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.9);border:0;font-size:26px;cursor:pointer}
+.lb .prev{right:16px}.lb .next{left:16px}
 
 /* why */
 .why{background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)}
@@ -166,81 +176,102 @@ footer .copy{width:100%;text-align:center;opacity:.5;font-size:14px;border-top:1
   </div>
 </div>
 
-<section class="block" id="products">
+<section class="block" id="products" style="padding-bottom:40px">
   <div class="wrap">
     <div class="head reveal">
       <span class="tag">منتجاتنا</span>
       <h2 class="display">اختار النظام اللي يناسب شغلك</h2>
       <p>كل نظام مصمم لمشكلة حقيقية شفناها بالسوق، ومجرّب على أرض الواقع.</p>
     </div>
+  </div>
+</section>
 
-    <article class="product reveal" id="lectures">
-      <div class="gallery">
-        <img src="assets/img/lectures-1.webp" alt="تعب المحاضرات راح بلاش" loading="lazy">
-        <img src="assets/img/lectures-2.webp" alt="صار عندك تطبيق المحاضرات" loading="lazy">
-      </div>
+<section class="product p-lectures" id="lectures">
+  <div class="wrap">
+    <div class="p-top reveal">
       <div class="info">
         <span class="kicker">للمدرسين والأساتذة</span>
         <h3 class="display">تطبيق المحاضرات</h3>
         <p class="lead">تعب المحاضرات راح بلاش — صار عندك تطبيقك الخاص باسمك، بدون نسبة وبدون تكلفة عالية.</p>
-        <ul>
+      </div>
+      <ul class="feat">
           <li>تطبيق باسمك وشعارك على الموبايل</li>
           <li>ترفع محاضراتك ودروسك مرتبة حسب المادة</li>
           <li>طلابك يشتركون ويتابعون من أي مكان</li>
           <li>كل الأرباح إلك — ما ناخذ أي نسبة</li>
-        </ul>
-        <div class="price-row">
-          <div class="price"><small>فقط بـ</small>750$</div>
-          <a class="btn btn-o wa" data-msg="هلا، أريد تطبيق المحاضرات (750$)">اطلبه هسه</a>
-        </div>
-      </div>
-    </article>
+      </ul>
+    </div>
+    <div class="gallery reveal">
+      <button aria-label="تكبير التصميم"><img src="assets/img/lectures-1.webp" alt="تعب المحاضرات راح بلاش" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/lectures-2.webp" alt="صار عندك تطبيق المحاضرات" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/lectures-price.webp" alt="تطبيق المحاضرات فقط بـ 750$" loading="lazy"></button>
+    </div>
+    <div class="price-row reveal">
+      <div class="price"><small>فقط بـ</small>750$</div>
+      <span class="note">نشغّله إلك ونعلّمك عليه</span>
+      <a class="btn wa" data-msg="هلا، أريد تطبيق المحاضرات (750$)">اطلبه هسه</a>
+    </div>
+  </div>
+</section>
 
-    <article class="product rev reveal" id="attendance">
-      <div class="gallery">
-        <img src="assets/img/attend-1.webp" alt="البصمة بشركتك صارت كلش قديمة" loading="lazy">
-        <img src="assets/img/attend-2.webp" alt="البصمة هسه تطبيق سهل" loading="lazy">
-      </div>
+<section class="product p-attend" id="attendance">
+  <div class="wrap">
+    <div class="p-top reveal">
       <div class="info">
         <span class="kicker">للشركات والمكاتب</span>
         <h3 class="display">نظام البصمة</h3>
         <p class="lead">البصمة بشركتك صارت كلش قديمة؟ هسه البصمة تطبيق سهل على موبايل الموظف، ويتفعّل بس داخل شركتك.</p>
-        <ul>
+      </div>
+      <ul class="feat">
           <li>تسجيل حضور وانصراف من موبايل الموظف</li>
           <li>يشتغل بس داخل موقع الشركة — ما ينغش</li>
           <li>بدون أجهزة بصمة ولا صيانة ولا أعطال</li>
           <li>تقارير دوام وتأخير جاهزة للإدارة</li>
-        </ul>
-        <div class="price-row">
-          <div class="price"><small>فقط بـ</small>350$</div>
-          <a class="btn btn-o wa" data-msg="هلا، أريد نظام البصمة (350$)">اطلبه هسه</a>
-        </div>
-      </div>
-    </article>
+      </ul>
+    </div>
+    <div class="gallery reveal">
+      <button aria-label="تكبير التصميم"><img src="assets/img/attend-1.webp" alt="البصمة بشركتك صارت كلش قديمة" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/attend-2.webp" alt="البصمة هسه تطبيق سهل" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/attend-price.webp" alt="نظام البصمة فقط بـ 350$" loading="lazy"></button>
+    </div>
+    <div class="price-row reveal">
+      <div class="price"><small>فقط بـ</small>350$</div>
+      <span class="note">نشغّله إلك ونعلّمك عليه</span>
+      <a class="btn wa" data-msg="هلا، أريد نظام البصمة (350$)">اطلبه هسه</a>
+    </div>
+  </div>
+</section>
 
-    <article class="product reveal" id="pager">
-      <div class="gallery">
-        <img src="assets/img/pager-2.webp" alt="البيجر صار ماضي" loading="lazy">
-        <img src="assets/img/pager-3.webp" alt="تطبيق سهل يرسل اشعار للزبون بدون اجهزة" loading="lazy">
-      </div>
+<section class="product p-pager" id="pager">
+  <div class="wrap">
+    <div class="p-top reveal">
       <div class="info">
         <span class="kicker">للمطاعم والكافيهات</span>
         <h3 class="display">نظام البيجر</h3>
         <p class="lead">البيجر صار ماضي!! تطبيق سهل يرسل إشعار للزبون على موبايله لما يجهز طلبه — بدون أجهزة.</p>
-        <ul>
+      </div>
+      <ul class="feat">
           <li>إشعار فوري للزبون: استلمنا طلبك، جاهز، بالطريق</li>
           <li>لا أجهزة بيجر تضيع أو تتعطل أو تخلص بطاريتها</li>
           <li>شاشة بسيطة للكاشير والمطبخ</li>
           <li>زبون مرتاح = زبون يرجع</li>
-        </ul>
-        <div class="price-row">
-          <div class="price"><small>فقط بـ</small>250$</div>
-          <a class="btn btn-o wa" data-msg="هلا، أريد نظام البيجر (250$)">اطلبه هسه</a>
-        </div>
-      </div>
-    </article>
+      </ul>
+    </div>
+    <div class="gallery reveal">
+      <button aria-label="تكبير التصميم"><img src="assets/img/pager-1.webp" alt="شنو الجديد؟ تطبيق يخلصك من هالدوخة" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/pager-2.webp" alt="البيجر صار ماضي" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/pager-3.webp" alt="تطبيق سهل يرسل اشعار للزبون بدون اجهزة" loading="lazy"></button>
+      <button aria-label="تكبير التصميم"><img src="assets/img/pager-price.webp" alt="نظام البيجر فقط بـ 250$" loading="lazy"></button>
+    </div>
+    <div class="price-row reveal">
+      <div class="price"><small>فقط بـ</small>250$</div>
+      <span class="note">نشغّله إلك ونعلّمك عليه</span>
+      <a class="btn wa" data-msg="هلا، أريد نظام البيجر (250$)">اطلبه هسه</a>
+    </div>
   </div>
 </section>
+
+<div class="lb" id="lb"><button class="x" aria-label="إغلاق">×</button><button class="nav prev" aria-label="السابق">›</button><img alt=""><button class="nav next" aria-label="التالي">‹</button></div>
 
 <section class="block why">
   <div class="wrap">
@@ -311,6 +342,18 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 const nav = document.getElementById('nav');
 const onScroll = () => nav.classList.toggle('solid', scrollY > 40);
 addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+// تكبير التصاميم
+const lb=document.getElementById('lb'), lbImg=lb.querySelector('img'); let set=[], idx=0;
+const show=i=>{idx=(i+set.length)%set.length; lbImg.src=set[idx].src; lbImg.alt=set[idx].alt;};
+document.querySelectorAll('.gallery').forEach(g=>{const imgs=[...g.querySelectorAll('img')];
+  imgs.forEach((im,i)=>im.parentElement.addEventListener('click',()=>{set=imgs;show(i);lb.classList.add('open');}));});
+lb.querySelector('.x').onclick=()=>lb.classList.remove('open');
+lb.querySelector('.prev').onclick=e=>{e.stopPropagation();show(idx-1)};
+lb.querySelector('.next').onclick=e=>{e.stopPropagation();show(idx+1)};
+lb.onclick=e=>{if(e.target===lb)lb.classList.remove('open')};
+addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')lb.classList.remove('open'); if(e.key==='ArrowLeft')show(idx+1); if(e.key==='ArrowRight')show(idx-1);});
 
 const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
