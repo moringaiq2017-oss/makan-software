@@ -24,10 +24,13 @@ nginx -t && systemctl reload nginx
 certbot --nginx -d soft.makanstudios.net
 ```
 
-## 3) التحديث بعد أي تعديل
+## 3) النشر التلقائي
+كرون على السيرفر يسحب من GitHub كل دقيقة — أي `git push` على `main` ينزل خلال دقيقة.
+(المستودع عام، فالسحب بلا مفاتيح.)
 ```bash
-git -C /var/www/makan-software pull
+(crontab -l 2>/dev/null | grep -v makan-software; echo '* * * * * git -C /var/www/makan-software pull -q --ff-only >/dev/null 2>&1') | crontab -
 ```
+للتحقق: `crontab -l | grep makan-software`
 
 ## تعديل رقم الواتساب والإيميل
 أعلى `<script>` في `index.html`: الثابتان `WHATSAPP` و `EMAIL`.
